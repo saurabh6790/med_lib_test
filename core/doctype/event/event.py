@@ -15,7 +15,35 @@ class DocType:
 	def validate(self):
 		if self.doc.starts_on and self.doc.ends_on and self.doc.starts_on > self.doc.ends_on:
 			webnotes.msgprint(webnotes._("Event End must be after Start"), raise_exception=True)
+	def on_update(self):
+	
+		#webnotes.errprint(" in on_update")
+		qry=webnotes.conn.sql(""" select event_type from tabEvent where starts_on>='%s' and
+			ends_on<='%s' and service='%s' """%(self.doc.starts_on,self.doc.ends_on,self.doc.service),as_list=1)
+              
+		#t=[self.doc.event_type]
+		#webnotes.errprint(t)
+          	#webnotes.errprint(qry.count(t)==1)
+		if self.doc.event_type=='Cancel':
+			webnotes.conn.sql("update `tabSlot Child` set status='Cancel' where name='"+self.doc.slot+"'")
+
+		for i in qry:
 			
+			if i==[self.doc.event_type]:
+				
+				if self.doc.event_type=='Confirm':
+					t=qry.count([self.doc.event_type])
+					if t==2:
+						webnotes.msgprint("Sorry...!!One event is already confirmed for the given schedule",raise_exception=1)
+					#break
+				if self.doc.event_type=='Waiting':
+					p=qry.count([self.doc.event_type])
+					if p==1:
+						webnotes.errprint("One Event is already  waiting for the given schedule")
+					if p==3:
+						
+						webnotes.msgprint("Sorry..!!Already two event are waiting for the given schedule",raise_exception=1)
+	
 def get_match_conditions():
 	return """(tabEvent.event_type='Public' or tabEvent.owner='%(user)s'
 		or exists(select * from `tabEvent User` where 
@@ -59,7 +87,7 @@ def get_events(start, end, user=None, for_reminder=False):
 	roles = webnotes.get_roles(user)
 	events = webnotes.conn.sql("""select name, subject, description,
 		starts_on, ends_on, owner, all_day, event_type, repeat_this_event, repeat_on,
-		monday, tuesday, wednesday, thursday, friday, saturday, sunday
+		monday, tuesday, wednesday, thursday, friday, saturday, sunday, doctor_name, patient, service
 		from tabEvent where ((
 			(date(starts_on) between date('%(start)s') and date('%(end)s'))
 			or (date(ends_on) between date('%(start)s') and date('%(end)s'))

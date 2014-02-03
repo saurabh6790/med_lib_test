@@ -4657,9 +4657,16 @@ function DayEventRenderer() {
 					htmlEscape(formatDates(event.start, event.end, opt('timeFormat'))) +
 					"</span>";
 			}
+			var desc = '---';
+			var doc = '---';
+			if(event.description){
+				desc = event.description
+			}
+			if(event.doctor_name){
+				doc = event.doctor_name
+			}
 			html +=
-				"<span class='fc-event-title'>" + htmlEscape(event.title) + "</span>" +
-				"</div>";
+				"<span class='fc-event-title' style='word-spacing:5px;'> <b style='word-spacing:5px;'> Subject: </b> " + htmlEscape(event.title) +'<br /> Time:'+ htmlEscape(formatDates(event.start, event.end, opt('timeFormat')))+ '<br /> Description : '+htmlEscape(desc) +'<br /> Doctor : '+htmlEscape(doc) +'<br /> Patient : '+htmlEscape(event.patient) +'<br /> Service : '+htmlEscape(event.service) + "</span></div>";
 			if (seg.isEnd && isEventResizable(event)) {
 				html +=
 					"<div class='ui-resizable-handle ui-resizable-" + (rtl ? 'w' : 'e') + "'>" +

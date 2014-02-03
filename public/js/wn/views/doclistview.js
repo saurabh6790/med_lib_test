@@ -71,6 +71,9 @@ wn.views.DocListView = wn.ui.Listing.extend({
 		this.appframe.set_title(wn._(this.doctype) + " " + wn._("List"));
 		this.appframe.add_module_icon(module, this.doctype, null, true);
 		this.appframe.set_views_for(this.doctype, "list");
+		if(this.doctype=='Lead'){
+                    this.appframe.set_title(wn._("Referring Physician List"));
+               }
 	},
 	
 	setup: function() {

@@ -9,6 +9,8 @@ cur_frm.cscript.repeat_on = function(doc, cdt, cdn) {
 	}
 }
 
+cur_frm.add_fetch('doctor', 'lead_name', 'doctor_name');
+
 cur_frm.cscript.refresh = function(doc, cdt, cdn) {
 
 }

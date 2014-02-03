@@ -2,7 +2,7 @@
  {
   "creation": "2013-06-10 13:17:47", 
   "docstatus": 0, 
-  "modified": "2013-11-20 12:45:15", 
+  "modified": "2014-02-02 14:14:19", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -49,6 +49,14 @@
  }, 
  {
   "doctype": "DocField", 
+  "fieldname": "slot", 
+  "fieldtype": "Link", 
+  "hidden": 0, 
+  "label": "Slot", 
+  "options": "Slot Child"
+ }, 
+ {
+  "doctype": "DocField", 
   "fieldname": "subject", 
   "fieldtype": "Data", 
   "in_list_view": 1, 
@@ -64,9 +72,23 @@
   "no_copy": 0, 
   "oldfieldname": "event_type", 
   "oldfieldtype": "Select", 
-  "options": "Private\nPublic\nCancel", 
+  "options": "Waiting\nConfirm\nCancel", 
   "reqd": 1, 
   "search_index": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "modality", 
+  "fieldtype": "Link", 
+  "label": "Modality", 
+  "options": "Modality"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "study", 
+  "fieldtype": "Link", 
+  "label": "Study", 
+  "options": "Study"
  }, 
  {
   "default": "1", 
@@ -99,6 +121,26 @@
   "fieldtype": "Datetime", 
   "label": "Ends on", 
   "reqd": 0
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "patient", 
+  "fieldtype": "Link", 
+  "label": "Patient", 
+  "options": "Patient Register"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "patient_name", 
+  "fieldtype": "Data", 
+  "label": "Patient Name"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "service", 
+  "fieldtype": "Link", 
+  "label": "Service", 
+  "options": "Study"
  }, 
  {
   "doctype": "DocField", 
@@ -209,6 +251,7 @@
   "doctype": "DocField", 
   "fieldname": "participants", 
   "fieldtype": "Section Break", 
+  "hidden": 1, 
   "label": "Participants", 
   "oldfieldtype": "Section Break"
  }, 
@@ -216,6 +259,7 @@
   "doctype": "DocField", 
   "fieldname": "individuals", 
   "fieldtype": "Column Break", 
+  "hidden": 1, 
   "label": "Individuals", 
   "oldfieldtype": "Column Break", 
   "print_width": "50%", 
@@ -225,6 +269,7 @@
   "doctype": "DocField", 
   "fieldname": "event_individuals", 
   "fieldtype": "Table", 
+  "hidden": 1, 
   "label": "Event Individuals", 
   "no_copy": 0, 
   "oldfieldname": "event_individuals", 
@@ -236,6 +281,7 @@
   "doctype": "DocField", 
   "fieldname": "groups", 
   "fieldtype": "Column Break", 
+  "hidden": 1, 
   "label": "Groups", 
   "oldfieldtype": "Column Break", 
   "print_width": "50%", 
@@ -245,6 +291,7 @@
   "doctype": "DocField", 
   "fieldname": "event_roles", 
   "fieldtype": "Table", 
+  "hidden": 1, 
   "label": "Event Roles", 
   "no_copy": 0, 
   "oldfieldname": "event_roles", 
@@ -256,7 +303,7 @@
   "doctype": "DocField", 
   "fieldname": "ref_type", 
   "fieldtype": "Data", 
-  "hidden": 0, 
+  "hidden": 1, 
   "label": "Ref Type", 
   "no_copy": 0, 
   "oldfieldname": "ref_type", 
@@ -268,13 +315,24 @@
   "doctype": "DocField", 
   "fieldname": "ref_name", 
   "fieldtype": "Data", 
-  "hidden": 0, 
+  "hidden": 1, 
   "label": "Ref Name", 
   "no_copy": 0, 
   "oldfieldname": "ref_name", 
   "oldfieldtype": "Data", 
   "read_only": 1, 
   "search_index": 0
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "lab", 
+  "fieldtype": "Data", 
+  "hidden": 1, 
+  "in_filter": 1, 
+  "in_list_view": 1, 
+  "label": "Lab", 
+  "read_only": 0, 
+  "reqd": 0
  }, 
  {
   "doctype": "DocPerm", 

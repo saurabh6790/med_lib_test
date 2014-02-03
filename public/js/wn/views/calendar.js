@@ -68,13 +68,13 @@ wn.views.Calendar = Class.extend({
 			"color": "#b94a48"
 		},
 		"warning": {
-			"color": "#f89406"
+			"color": "#CC1414"
 		},
 		"success": {
 			"color": "#468847"
 		},
 		"info": {
-			"color": "#3a87ad"
+			"color": "#E65C00"
 		},
 		"inverse": {
 			"color": "#333333"

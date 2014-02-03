@@ -45,8 +45,18 @@ wn.ui.form.Toolbar = Class.extend({
 			this.appframe.set_title_left('<i class="icon-angle-left"></i> ' + wn._(this.frm.meta.module), 
 				function() { wn.set_route(wn.modules[me.frm.meta.module].link); });
 		} else {
-			this.appframe.set_title_left('<i class="icon-angle-left"></i> ' + wn._(this.frm.doctype), 
-				function() { wn.set_route("List", me.frm.doctype); });
+			/*this.appframe.set_title_left('<i class="icon-angle-left"></i> ' + wn._(this.frm.doctype), 
+				function() { wn.set_route("List", me.frm.doctype); });*/
+			if(this.frm.doctype=='Lead')
+				{
+					this.appframe.set_title_left('<i class="icon-angle-left"></i> ' + wn._('Referring Physician'), 
+					function() { wn.set_route("List", me.frm.doctype); });
+				}
+				else
+				{
+					this.appframe.set_title_left('<i class="icon-angle-left"></i> ' + wn._(this.frm.doctype), 
+					function() { wn.set_route("List", me.frm.doctype); });
+				}
 		}
 	},
 	show_infobar: function() {

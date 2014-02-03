@@ -8,8 +8,9 @@ wn.views.calendar["Event"] = {
 		"status": "event_type",
 	},
 	style_map: {
-		"Public": "success",
-		"Private": "info"
+		"Confirm": "success",
+		"Waiting": "info",
+		"Cancel": "warning"
 	},
 	get_events_method: "core.doctype.event.event.get_events"
 }
