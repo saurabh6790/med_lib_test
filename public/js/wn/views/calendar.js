@@ -41,6 +41,36 @@ wn.views.Calendar = Class.extend({
 		$(this.page).on("show", function() {
 			me.$cal.fullCalendar("refetchEvents");
 		})
+		if(this.doctype == 'Patient Encounter Entry'){
+			alert("hello")
+			console.log(['hello',me])
+			this.wrapper = $(this.page).find(".layout-main");
+			(this.wrapper).prepend($('<div class="help" id="help"></div>').html('<select class = "form-control" id="sel" style="width:30%;"><option value=""></option></select> <br><br>'));
+			
+
+			var dropdown = document.getElementById("sel");
+	        wn.call({
+	                method: 'selling.doctype.patient_encounter_entry.patient_encounter_entry.get_modality',
+	                callback: function(r) {
+	                        for(var i=0;i<(r.message).length;i++){
+	                                var opt = document.createElement("option");
+	                                opt.value = r.message[i][0];
+	                                opt.text = r.message[i][0];
+	                                dropdown.appendChild(opt);
+	                        }
+
+	                }
+	        })
+
+			$("#sel").click(function() {
+				console.log(me.$wrapper)
+				$('.fc').remove()
+				$('.alert.alert-info.form-intro-area').remove()
+				me.setup_options()
+				me.make()
+			})
+		}
+
 	},
 	make: function() {
 		var me = this;
@@ -55,6 +85,7 @@ wn.views.Calendar = Class.extend({
 		this.$cal.fullCalendar(this.cal_options);
 	},
 	field_map: {
+		"proj": $("#sel").val(),
 		"id": "name",
 		"start": "start",
 		"end": "end",
@@ -68,13 +99,13 @@ wn.views.Calendar = Class.extend({
 			"color": "#b94a48"
 		},
 		"warning": {
-			"color": "#CC1414"
+			"color": "#f89406"
 		},
 		"success": {
 			"color": "#468847"
 		},
 		"info": {
-			"color": "#E65C00"
+			"color": "#3a87ad"
 		},
 		"inverse": {
 			"color": "#333333"
@@ -123,6 +154,9 @@ wn.views.Calendar = Class.extend({
 				
 				event[me.field_map.start] = wn.datetime.get_datetime_as_string(startDate);
 				
+				if($("#sel").val())
+					event[me.field_map.proj] = $("#sel").val()
+
 				if(me.field_map.end)
 					event[me.field_map.end] = wn.datetime.get_datetime_as_string(endDate);
 
@@ -145,7 +179,8 @@ wn.views.Calendar = Class.extend({
 		return {
 			doctype: this.doctype,
 			start: wn.datetime.get_datetime_as_string(start),
-			end: wn.datetime.get_datetime_as_string(end)
+			end: wn.datetime.get_datetime_as_string(end),
+			op:$("#sel").val()
 		}
 	},
 	prepare_events: function(events) {

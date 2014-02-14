@@ -72,6 +72,7 @@ def update_translations():
 		return
 	if os.path.exists(status_file_path):
 		with open(status_file_path, "r") as langstatusfile:
+			print langstatusfile
 			langstatus = eval(langstatusfile.read())
 			
 	for lang in languages:
