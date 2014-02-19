@@ -159,7 +159,7 @@ wn.views.moduleview.ModuleView = Class.extend({
 					item.icon = '<i class="icon-fixed-width '+ wn.boot.doctype_icons[item.doctype] + '"></i> ';
 				}
 				if(item.doctype && !item.route) {
-					item.route = "List/" + encodeURIComponent(item.doctype);
+					item.route = "Report/" + encodeURIComponent(item.doctype);
 				}
 				if(item.page && !item.route) {
 					item.route = item.page;

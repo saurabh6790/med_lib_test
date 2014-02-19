@@ -42,8 +42,8 @@ wn.views.Calendar = Class.extend({
 			me.$cal.fullCalendar("refetchEvents");
 		})
 		if(this.doctype == 'Patient Encounter Entry'){
-			alert("hello")
-			console.log(['hello',me])
+			// alert("hello")
+			// console.log(['hello',me])
 			this.wrapper = $(this.page).find(".layout-main");
 			(this.wrapper).prepend($('<div class="help" id="help"></div>').html('<select class = "form-control" id="sel" style="width:30%;"><option value=""></option></select> <br><br>'));
 			
@@ -186,6 +186,7 @@ wn.views.Calendar = Class.extend({
 	prepare_events: function(events) {
 		var me = this;
 		$.each(events, function(i, d) {
+			console.log(['event', d])
 			d.id = d.name;
 			d.editable = wn.model.can_write(d.doctype || me.doctype);
 			
@@ -202,6 +203,7 @@ wn.views.Calendar = Class.extend({
 				d.allDay = 1;
 				
 			if(d.status) {
+				console.log(['status',status])
 				if(me.style_map) {
 					$.extend(d, me.styles[me.style_map[d.status]] || {});
 				} else {

@@ -3073,9 +3073,11 @@ function AgendaView(element, calendar, viewName) {
 		d = zeroDate();
 		maxd = addMinutes(cloneDate(d), maxMinute);
 		addMinutes(d, minMinute);
+		console.log([cloneDate(d),maxMinute,d,maxd])
 		slotCnt = 0;
 		for (i=0; d < maxd; i++) {
-			minutes = d.getMinutes();
+			minutes = d.getMinutes()/2;
+			console.log(minutes)
 			s +=
 				"<tr class='fc-slot" + i + ' ' + (!minutes ? '' : 'fc-minor') + "'>" +
 				"<th class='fc-agenda-axis " + headerClass + "'>" +
@@ -3874,7 +3876,11 @@ function AgendaEventRenderer() {
 					
 	}
 	
-	
+	$(document).ready( function(){
+		$(document).on('mouseover', 'div.fc-widget-content', function(){
+			console.log("into")
+	});
+	})
 	function slotSegHtml(event, seg) {
 		var html = "<";
 		var url = event.url;
@@ -3910,7 +3916,7 @@ function AgendaEventRenderer() {
 			"</div>" +
 			"</div>" +
 			"<div class='fc-event-content'>" +
-			"<div class='fc-event-title'>" +
+			"<div class='fc-event-title' id='1'>" +
 			htmlEscape(event.title) +
 			"</div>" +
 			"</div>" +
