@@ -5,8 +5,8 @@
   "Calendar": {
    "color": "#2980b9", 
    "icon": "icon-calendar", 
-   "label": "Calendar", 
-   "link": "Calendar/Event", 
+   "label": "Appointment Scheduling", 
+   "link": "Calendar/Patient Encounter Entry", 
    "type": "view"
   }, 
   "Finder": {

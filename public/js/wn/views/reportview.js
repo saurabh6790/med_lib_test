@@ -82,7 +82,12 @@ wn.views.ReportView = wn.ui.Listing.extend({
 
 	setup: function() {
 		var me = this;
-		this.page_title = wn._('Report')+ ': ' + wn._(this.docname ? (this.doctype + ' - ' + this.docname) : this.doctype);
+		var doc = this.doctype
+		if(this.doctype == 'Sales Invoice') {doc = 'Bill List'}
+		if(this.doctype == 'Lead') {doc = 'Referring Physicians'}
+		if(this.doctype == 'Advance Entry') {doc = 'Advance Payment Entry'}
+		console.log(doc)
+		this.page_title =  wn._(this.docname ? (this.doctype + ' - ' + this.docname) : doc);
 		this.page.appframe.set_title(this.page_title)
 		this.make({
 			appframe: this.page.appframe,

@@ -142,11 +142,6 @@ wn.ui.toolbar.Toolbar = Class.extend({
 				<li><a href="#" onclick="return wn.ui.toolbar.clear_cache();">\
 					<i class="icon-fixed-width icon-refresh"></i> '
 					+wn._('Clear Cache & Refresh')+'</a></li>\
-				<li><a href="#" onclick="return wn.ui.toolbar.show_about();">\
-					<i class="icon-fixed-width icon-info-sign"></i> '
-					+wn._('About')+'</a></li>\
-				<li><a href="http://erpnext.org/attributions.html" target="_blank"><i class="icon-fixed-width icon-heart"></i> '
-					+wn._('Attributions')+'</a></li>\
 			</ul>\
 		</li>');
 		

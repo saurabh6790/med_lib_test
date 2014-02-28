@@ -172,7 +172,7 @@ To complete your registration, please click on the link below:
 Thank you,<br>
 %(user_fullname)s
 		"""
-		self.send_login_mail("Welcome to " + webnotes.get_config().get("app_name"), txt, 
+		self.send_login_mail("Welcome to MedSynaptic" , txt, 
 			{ "link": link })
 
 	def send_login_mail(self, subject, txt, add_args):
