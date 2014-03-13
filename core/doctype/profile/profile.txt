@@ -2,7 +2,7 @@
  {
   "creation": "2013-03-07 11:54:44", 
   "docstatus": 0, 
-  "modified": "2013-11-03 11:10:54", 
+  "modified": "2014-03-07 16:03:39", 
   "modified_by": "Administrator", 
   "owner": "Administrator"
  }, 
@@ -59,6 +59,13 @@
  }, 
  {
   "doctype": "DocField", 
+  "fieldname": "profile_type", 
+  "fieldtype": "Select", 
+  "label": "Profile Type", 
+  "options": "Employee\nPatient"
+ }, 
+ {
+  "doctype": "DocField", 
   "fieldname": "sb0_5", 
   "fieldtype": "Section Break"
  }, 
@@ -77,8 +84,22 @@
   "label": "Email", 
   "oldfieldname": "email", 
   "oldfieldtype": "Data", 
-  "reqd": 1, 
+  "reqd": 0, 
   "search_index": 0
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "number", 
+  "fieldtype": "Data", 
+  "label": "Number"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "middle_name", 
+  "fieldtype": "Data", 
+  "label": "Patient Id", 
+  "oldfieldname": "middle_name", 
+  "oldfieldtype": "Data"
  }, 
  {
   "doctype": "DocField", 
@@ -89,14 +110,6 @@
   "oldfieldname": "first_name", 
   "oldfieldtype": "Data", 
   "reqd": 1
- }, 
- {
-  "doctype": "DocField", 
-  "fieldname": "middle_name", 
-  "fieldtype": "Data", 
-  "label": "Middle Name (Optional)", 
-  "oldfieldname": "middle_name", 
-  "oldfieldtype": "Data"
  }, 
  {
   "doctype": "DocField", 

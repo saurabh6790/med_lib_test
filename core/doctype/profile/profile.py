@@ -5,6 +5,9 @@ from __future__ import unicode_literals
 import webnotes, json
 from webnotes.utils import cint, now, cstr
 from webnotes import _
+from webnotes import msgprint
+from webnotes.model.code import get_obj
+from webnotes.model.bean import getlist, copy_doclist
 
 class DocType:
 	def __init__(self, doc, doclist):
@@ -14,23 +17,28 @@ class DocType:
 	def autoname(self):
 		"""set name as email id"""
 		if self.doc.name not in ('Guest','Administrator'):
-			self.doc.email = self.doc.email.strip()		
-			self.doc.name = self.doc.email
+			if self.doc.email:
+				self.doc.email = self.doc.email.strip()
+				
+			if self.doc.profile_type == 'Employee':
+				self.doc.name = self.doc.email
+			else:
+				self.doc.name = self.doc.middle_name
 			
 			if webnotes.conn.exists("Profile", self.doc.name):
 				webnotes.msgprint("Name Exists", raise_exception=True)
 
 	def validate(self):
 		self.in_insert = self.doc.fields.get("__islocal")
-		if self.doc.name not in ('Guest','Administrator'):
+		if self.doc.name not in ('Guest','Administrator') and self.doc.email:
 			self.validate_email_type(self.doc.email)
 		self.validate_max_users()
 		self.add_system_manager_role()
 		self.check_enable_disable()
 		if self.in_insert:
-			if self.doc.name not in ("Guest", "Administrator"):
+			if self.doc.name not in ("Guest", "Administrator") and (self.doc.email or self.doc.number):
 				self.send_welcome_mail()
-				webnotes.msgprint(_("Welcome Email Sent"))
+				webnotes.msgprint(_("Welcome Message Sent"))
 		else:
 			self.email_new_password()
 
@@ -119,7 +127,7 @@ class DocType:
 	def password_reset_mail(self, link):
 		"""reset password"""
 		txt = """
-## Password Reset
+Password Reset
 
 Dear %(first_name)s,
 
@@ -135,7 +143,7 @@ Thank you,<br>
 	
 	def password_update_mail(self, password):
 		txt = """
-## Password Update Notification
+Password Update Notification
 
 Dear %(first_name)s,
 
@@ -157,7 +165,7 @@ Thank you,<br>
 		link = get_url("/update-password?key=" + self.doc.reset_password_key)
 		
 		txt = """
-## %(company)s
+%(company)s
 
 Dear %(first_name)s,
 
@@ -200,8 +208,29 @@ Thank you,<br>
 		
 		sender = webnotes.session.user not in ("Administrator", "Guest") and webnotes.session.user or None
 		
-		sendmail_md(recipients=self.doc.email, sender=sender, subject=subject, msg=txt % args)
-		
+		if self.doc.email:
+			sendmail_md(recipients=self.doc.email, sender=sender, subject=subject, msg=txt % args)
+		elif self.doc.number:
+			# webnotes.errprint(self.doc.number)
+			# msgprint(get_obj('SMS Control', 'SMS Control').send_sms(self.doc.number, txt % args))
+			msg = txt % args
+			self.send_sms(msg)
+
+	def send_sms(self, msg):
+		ss = get_obj('SMS Settings', 'SMS Settings', with_children=1)
+		# webnotes.errprint(ss)
+		args = {}
+		for d in getlist(ss.doclist, 'static_parameter_details'):
+			args[d.parameter] = d.value
+		sms_url=webnotes.conn.get_value('SMS Settings', None, 'sms_gateway_url')
+		msg_parameter=webnotes.conn.get_value('SMS Settings', None, 'message_parameter')
+		receiver_parameter=webnotes.conn.get_value('SMS Settings', None, 'receiver_parameter')
+		url = sms_url +"?user="+ args["user"] +"&senderID="+ args["sender ID"] +"&receipientno="+ self.doc.number +"\
+				&dcs="+ args["dcs"]+ "&msgtxt=" + msg +"&state=" +args["state"]
+		# webnotes.errprint(url)
+		import requests
+		r = requests.get(url)
+
 	def a_system_manager_should_exist(self):
 		if not self.get_other_system_managers():
 			webnotes.msgprint(_("""Hey! There should remain at least one System Manager"""),

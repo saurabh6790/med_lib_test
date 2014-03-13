@@ -63,7 +63,7 @@ wn.views.Calendar = Class.extend({
 	        })
 
 			$("#sel").click(function() {
-				console.log(me.$wrapper)
+				// console.log(me.$wrapper)
 				$('.fc').remove()
 				$('.alert.alert-info.form-intro-area').remove()
 				me.setup_options()
@@ -186,7 +186,7 @@ wn.views.Calendar = Class.extend({
 	prepare_events: function(events) {
 		var me = this;
 		$.each(events, function(i, d) {
-			console.log(['event', d])
+			// console.log(['event', d])
 			d.id = d.name;
 			d.editable = wn.model.can_write(d.doctype || me.doctype);
 			
@@ -203,7 +203,7 @@ wn.views.Calendar = Class.extend({
 				d.allDay = 1;
 				
 			if(d.status) {
-				console.log(['status',status])
+				// console.log(['status',status])
 				if(me.style_map) {
 					$.extend(d, me.styles[me.style_map[d.status]] || {});
 				} else {

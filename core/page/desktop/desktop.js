@@ -35,7 +35,7 @@ wn.core.pages.desktop.render = function() {
 				<div class="case-border" style="background-color: %(color)s">\
 					<i class="%(icon)s"></i>\
 				</div>\
-				<div class="case-label">%(label)s</div>\
+				<div class="case-label" style="color:black;">%(label)s</div>\
 			</div>', module)).click(function() {
 				var link = $(this).attr("data-link");
 				if(link.substr(0, 1)==="/") {

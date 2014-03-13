@@ -1,0 +1,124 @@
+[
+ {
+  "creation": "2014-03-12 11:32:00", 
+  "docstatus": 0, 
+  "modified": "2014-03-12 12:28:44", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "doctype": "DocType", 
+  "issingle": 1, 
+  "istable": 0, 
+  "module": "Core", 
+  "name": "__common__"
+ }, 
+ {
+  "doctype": "DocField", 
+  "name": "__common__", 
+  "parent": "DB SYNC", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0
+ }, 
+ {
+  "create": 1, 
+  "doctype": "DocPerm", 
+  "name": "__common__", 
+  "parent": "DB SYNC", 
+  "parentfield": "permissions", 
+  "parenttype": "DocType", 
+  "permlevel": 0, 
+  "read": 1, 
+  "report": 0, 
+  "role": "Administrator", 
+  "write": 1
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "DB SYNC"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "remote_host_settings", 
+  "fieldtype": "Section Break", 
+  "label": "Remote Host Settings"
+ }, 
+ {
+  "description": "Enter server's IP address here", 
+  "doctype": "DocField", 
+  "fieldname": "host_id", 
+  "fieldtype": "Data", 
+  "label": "Host Id"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "host_ssh_user", 
+  "fieldtype": "Data", 
+  "label": "Host SSH User"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "host_ssh_password", 
+  "fieldtype": "Password", 
+  "label": "Host SSH Password"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "remote_dbuser", 
+  "fieldtype": "Data", 
+  "label": "Remote dbUser"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "remote_dbuserpassword", 
+  "fieldtype": "Password", 
+  "label": "Remote dbUserPassword"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "remote_dbname", 
+  "fieldtype": "Data", 
+  "label": "Remote dbName"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "local_host_settings", 
+  "fieldtype": "Section Break", 
+  "label": "Local Host Settings"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "dbuser", 
+  "fieldtype": "Data", 
+  "label": "dbUser"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "dbuserpassword", 
+  "fieldtype": "Password", 
+  "label": "dbUserPassword"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "dbname", 
+  "fieldtype": "Data", 
+  "label": "dbName"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "synchronization", 
+  "fieldtype": "Section Break", 
+  "label": "Synchronization"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "sync_db", 
+  "fieldtype": "Button", 
+  "label": "Sync DB", 
+  "options": "sync_db"
+ }, 
+ {
+  "doctype": "DocPerm"
+ }
+]
